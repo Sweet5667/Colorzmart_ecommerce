@@ -1,0 +1,17 @@
+ <div class="btn-group menu_medi fixed-top" role="group" aria-label="Basic example">
+	 {% if request.user.is_superuser %}
+		<a type="button" class="btn btn-dark " style=" border-radius: 0px" href="{% url 'admin_local' %}"><i class="fa fa-flag"></i>Admin</a>
+		{% endif %}
+     <a href="{% url 'home' %}" type="button" class="btn btn-dark "><i class="fa fa-home"></i>Home</a>
+	 {% if request.user.is_authenticated %}
+			<a type="button" class="btn btn-dark" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+            <a  type="button" class="btn btn-dark" href="#"><i class="fa fa-user"></i> {{request.user}}</a>
+		{% else %}
+			<a type="button" class="btn btn-dark" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a>
+            <a type="button" class="btn btn-dark" href="{% url 'register' %}"><i class="fa fa-users"></i> Register</a>
+		{% endif %}
+        <a type="button" class="btn btn-dark" href="{% url 'collections' %}"><i class="fa fa-cubes"></i> Collections</a>
+		<a class="btn btn-dark" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
+	 <a type="button" class="btn btn-dark" href="{% url 'fav_view' %}" style=" border-radius: 0px"><i class="fa fa-heart"></i> Wishlist</a>
+	 
+</div> 

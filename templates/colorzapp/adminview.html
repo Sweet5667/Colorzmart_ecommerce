@@ -1,0 +1,37 @@
+{% extends "colorzapp/layouts/main.html" %}
+{% block content %}
+
+<div class="container py-5" style="min-height:500px;">
+	<div class="row">
+		<h3 class="my-3">New Orders</h3>
+		<hr class="my-2" style="border-color:black;">
+		{% for data in datas %} 
+		<div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4">
+        	<div class="card my-3 h-100">
+            	<img src="{{data.product.product_image.url}}"  class="card-image-top" alt="Categories">
+            	<div class="card-body">
+              		<h5 class="card-title text-primary ">{{data.product.name}}</h5>
+					<p class="card-title ">Name: {{data.name}}</p>
+					<p class="card-title ">Address: {{data.address}}</p>
+					<p class="card-title">Mobile No: {{data.mobile}}</p>
+              		<p class="card-text" >
+						<span class="float-start new_price" style="position:absolute;bottom:5px;left:4px;">
+							Rs.{{data.product.selling_price | stringformat:'d'}}
+						</span>
+						
+						<span class="float-end new_price" style="position:absolute;bottom:5px;right:4px;">
+							<a class="btn btn-danger btn-sm" href="{% url 'shipped' data.id %}"><i class="fa fa-success">Shipped</i></a>
+						</span>
+					</p>
+           		</div>
+          	</div>
+        </div>
+		{% endfor %}
+	</div>
+</div>
+	
+
+
+
+
+{% endblock content %}

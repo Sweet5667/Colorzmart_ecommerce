@@ -1,0 +1,55 @@
+{% extends 'colorzapp/layouts/main.html' %}
+{% block title %}
+  Collections
+{% endblock title %}
+{% block content %}
+ 
+  <section class="bg-light py-4 my-5 cart_medi" style="min-height:600px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="mb-3">Categories</h4>
+          <hr style="border-color:black;">
+        </div>
+        
+		  <table class="table table-bordered">
+			  <tr>
+				  <th>Image</th>
+				  <th>Product Name</th>
+				  <th>Unit Price</th>
+				  <th>Quantity</th>
+				  <th>Amount</th>
+				  <th>Remove</th>
+			  </tr>
+			  {% for data in cart %}
+			  <tr>
+				  <td><img src="{{data.product.product_image.url}}"  alt="{{data.product.name}}" id="cart_img"></td>
+				  <td >{{data.product.name}}</td>
+				  <td>{{data.product.selling_price | stringformat:'d'}}</td>
+				  <td>{{data.product_qty}}</td>
+				  <td class="amt">{{data.total_cost}}</td>
+				  <td><a href="{% url 'remove_cart' data.id %}" onclick="return confirm('Are You Sure To Remove')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove</a></td>
+			  </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Total Amount</b></td>
+          <td id="net">0</td>
+          <td><a href="{% url 'buy_now' %}" class="btn btn-sucsess btn-sm" onclick="return confirm('Are You Sure To Buy')"><i class="fa fa-money"></i> buynow</a></td>
+        </tr>
+		  </table>
+				  
+      </div>
+      </div>
+  </section>
+<script>
+  const nodes=document.querySelectorAll('.amt');
+  const arr=Array.from(nodes);
+  const result=arr.reduce((acc,curr) =>{
+    return acc+=Number(curr.textContent)
+  },0);
+  document.getElementById("net").innerHTML="Rs : "+result;
+  
+</script>
+{% endblock content %}

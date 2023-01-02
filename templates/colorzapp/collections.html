@@ -1,0 +1,36 @@
+{% extends 'colorzapp/layouts/main.html' %}
+{% block title %}
+  Collections
+{% endblock title %}
+{% block content %}
+
+<section style="background-color: #eee;"class="my-3">
+  <div class="text-center container py-5">
+    <h4 class="my-3"><strong>Collections</strong></h4>
+    <hr class="my-4" style="border-color:black;">
+    <div class="row">
+      {% for data in catagory %}
+      <div class="col-lg-3 col-md-4 mb-4 col-6">
+        <div class="card h-100">
+         <a href="{% url 'collections' data.name %}">
+          <div class="ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img src="{{data.image.url}}" class="w-100" alt="Categories">
+
+          </div>
+          <div class="card-body">
+            <a href="{% url 'collections' data.name %}" class="text-reset">
+              <h5 class="card-title mb-3">{{data.name}}</h5>
+            </a>
+            <a href="{% url 'collections' data.name %}" class="text-reset">
+              <p>{{data.description}}</p>
+            </a>
+          </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}
